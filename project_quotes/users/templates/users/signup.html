@@ -1,8 +1,11 @@
 {% extends "quotes/base.html" %}
 
 {% block main %}
+<h1>
+  Hello world
+</h1>
 <form method="post">
   {% csrf_token %}
-    {{form.as_p}}
+    {{form.username}}
 </form>
 {% endblock %}
