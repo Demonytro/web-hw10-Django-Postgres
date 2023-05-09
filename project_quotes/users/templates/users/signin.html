@@ -1,6 +1,6 @@
 {% extends "quotes/base.html" %}
 
-{% block main %}
+{% block content %}
 <h3>Sign In</h3>
 
 {% if form.errors %}
@@ -13,16 +13,16 @@
 {% endfor %}
 {% endif %}
 
-<form method="post">
+<form method="post" action="{% url 'users:signin' %}">
     {% csrf_token %}
     <div class="row mb-3">
-        <label for="{{ form.username.id_for_label }}">Username</label>
-        {{form.username}}
+        <label>Username
+        {{form.username}}</label>
         <span>{{form.errors.username}}</span>
     </div>
     <div class="row mb-3">
-        <label for="{{ form.password.id_for_label }}">Password:</label>
-        {{form.password}}
+        <label>Password:
+        {{form.password}}</label>
         <span>{{form.errors.password}}</span>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

@@ -15,21 +15,21 @@
 <body>
     <div class="container">
         <div class="row header-box pt-3 mb-3">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <h1>
                     <a href="/" style="text-decoration: none">Quotes to Scrape</a>
                 </h1>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <p>
 
                     {% if user.is_authenticated %}
-                    <a href="#" class="btn btn-primary">Logout</a>
+                    <a href="{% url 'users:logoutuser' %}" class="btn btn-primary">Logout</a>
                     <a href="{% url 'quotes:add_tag' %}" class="btn btn-info">Add Tag</a>
                     <a href="{% url 'quotes:add_author' %}" class="btn btn-info">Add Author</a>
+                    <a href="{% url 'quotes:add_quote' %}" class="btn btn-info">Add Quote</a>
 
                     {% else %}
-                    <a href="{% url 'quotes:add_quote' %}" class="btn btn-info">Add Quote</a>
                     <a href="{% url 'users:signup' %}" class="btn btn-primary">SignUp</a>
                     <a href="{% url 'users:signin' %}" class="btn btn-primary">  SignIn  </a>
 

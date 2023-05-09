@@ -11,8 +11,7 @@ class QuoteForm(ModelForm):
 
     # author = ModelMultipleChoiceField(queryset=Author.objects.get('fullname'), required=True, widget=Select())
 
-    def __str__(self):
-        return self.quote
+
 
     class Meta:
         model = Quote
@@ -28,8 +27,6 @@ class AuthorForm(ModelForm):
     born_location = CharField(max_length=150, required=True, widget=TextInput())
     bio = CharField(required=True, widget=TextInput())
 
-    def __str__(self):
-        return self.fullname
 
     class Meta:
         model = Author
@@ -43,5 +40,4 @@ class TagForm(ModelForm):
         model = Tag
         fields = ["name"]
 
-    def __str__(self):
-        return self.name
+
