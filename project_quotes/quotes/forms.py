@@ -1,19 +1,24 @@
-from django.forms import ModelForm, CharField, TextInput, ModelMultipleChoiceField, SelectMultiple, Select
+from django.forms import ModelForm, CharField, TextInput, ModelMultipleChoiceField, SelectMultiple, Select, \
+    ModelChoiceField
 from .models import Quote, Tag, Author
 
 
 class QuoteForm(ModelForm):
     quote = CharField(required=True, widget=TextInput())  # blank=True,
-    tags = ModelMultipleChoiceField(queryset=Tag.objects.all(), required=True, widget=SelectMultiple())  # blank=True,
-    author = CharField(required=True, widget=TextInput())
-    # author = ModelMultipleChoiceField(queryset=Author.objects.all(), required=True, widget=Select())
+    tags = ModelMultipleChoiceField(queryset=Tag.objects.all().order_by('name'), required=True, widget=SelectMultiple())  # blank=True,
+    # author = CharField(required=True, widget=TextInput())
+    author = ModelChoiceField(queryset=Author.objects.all().order_by('fullname'), widget=Select())
+
     # author = ModelMultipleChoiceField(queryset=Author.objects.get('fullname'), required=True, widget=Select())
+
+    def __str__(self):
+        return self.quote
 
     class Meta:
         model = Quote
-        fields = ("quote", "author")
+        fields = ("quote", "author", "tags")
         # fields = ["quote"]
-        exclude = ['tags']
+        # exclude = ['tags']
         # exclude = ["author", 'tags']
 
 
@@ -22,6 +27,9 @@ class AuthorForm(ModelForm):
     born_date = CharField(max_length=50, required=True, widget=TextInput())
     born_location = CharField(max_length=150, required=True, widget=TextInput())
     bio = CharField(required=True, widget=TextInput())
+
+    def __str__(self):
+        return self.fullname
 
     class Meta:
         model = Author
@@ -34,3 +42,6 @@ class TagForm(ModelForm):
     class Meta:
         model = Tag
         fields = ["name"]
+
+    def __str__(self):
+        return self.name
